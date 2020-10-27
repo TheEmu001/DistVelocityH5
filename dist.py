@@ -29,10 +29,10 @@ def distance_det(file, legend_label, line_color):
 
     # calculate the difference from row under to row before
     # then calculate absolute value
-    data_df['|diff X|'] = data_df['snout_x'].diff(-1)
+    data_df['|diff X|'] = data_df['head_x'].diff(-1)
     data_df['|diff X|'] = data_df['|diff X|'].abs()
 
-    data_df['|diff Y|'] = data_df['snout_y'].diff(-1)
+    data_df['|diff Y|'] = data_df['head_y'].diff(-1)
     data_df['|diff Y|'] = data_df['|diff Y|'].abs()
 
     # calculating the cummulative sum down the column
