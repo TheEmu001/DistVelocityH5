@@ -151,6 +151,7 @@ if __name__ == '__main__':
                               'U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5']]
     avg_df['Avg Dist U50'] = only_U50.mean(axis=1)
     avg_df['Avg Dist U50 SEM'] = stats.sem(only_U50, axis=1)
+    plt.rc('font', family='Arial')
     plt.plot(avg_df['Time'], avg_df['Avg Dist U50'], color='blue', linewidth=1, label='Average Dist Saline+5mgkg U50')
 
     plt.fill_between(avg_df['Time'], avg_df["Avg Dist Saline"]-avg_df["Avg Dist Saline SEM"],
@@ -161,12 +162,15 @@ if __name__ == '__main__':
                      avg_df["Avg Dist U50"]+avg_df["Avg Dist U50 SEM"], alpha=0.25, facecolor='blue')
 
     # plot formatting
-    plt.xlabel('time (minutes)')
-    plt.ylabel('distance travelled (pixels)')
+    plt.xlabel('time (minutes)', fontname='Arial', fontsize=12)
+    plt.ylabel('distance travelled (pixels)', fontname='Arial', fontsize=12)
     plt.legend(loc=2)
-    # plt.title('Total Distance vs. Time for: ' + ' '.join(file.split()[:2]) + " "+ ''.join(animal[:2]))
-    plt.title('Average Cummulative Distance vs Time')
+    plt.title('Average Cummulative Distance vs Time', fontname='Arial', fontsize=12)
     leg = plt.legend()
     for i in leg.legendHandles:
         i.set_linewidth(3)
+
+    
     plt.show()
+
+    # plt.savefig('generated_figs\Cummulative Distance.eps', format='eps')
