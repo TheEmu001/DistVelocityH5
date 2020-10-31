@@ -157,13 +157,21 @@ if __name__ == '__main__':
 
     """NORBNI Data"""
 
-    vel_det(file='NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+    vel_det(file='NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
             legend_label='F1 10mgkg NORBNI+5mgkg U50', line_color='deepskyblue')
-    vel_det(file='NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+    vel_det(file='NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
             legend_label='F2 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
+    vel_det(file='NORBNI_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
+                 legend_label='M3 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
+    vel_det(file='NORBNI_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
+                 legend_label='M4 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
     only_NORBNI = avg_df.loc[:,
-               ['NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
-                'NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5']]
+               [
+                  'NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
+                'NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
+                'NORBNI_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
+                'NORBNI_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5'
+                ]]
     avg_df['Avg Vel NORBNI'] = only_NORBNI.mean(axis=1)
     avg_df['Avg Vel NORBNI SEM'] = stats.sem(only_NORBNI, axis=1)
     plt.plot(avg_df['Time'], avg_df['Avg Vel NORBNI'], color='blue', linewidth=1,
@@ -176,7 +184,7 @@ if __name__ == '__main__':
     plt.fill_between(avg_df['Time'], avg_df["Avg Vel U50"]-avg_df["Avg Vel U50 SEM"],
                      avg_df["Avg Vel U50"]+avg_df["Avg Vel U50 SEM"], alpha=0.25, facecolor='orange', edgecolor='orange')
     plt.fill_between(avg_df['Time'], avg_df["Avg Vel NORBNI"]-avg_df["Avg Vel NORBNI SEM"],
-                     avg_df["Avg Vel NORBNI"]+avg_df["Avg Vel NORBNI"], alpha=0.25, facecolor='blue', edgecolor='blue')
+                     avg_df["Avg Vel NORBNI"]+avg_df["Avg Vel NORBNI SEM"], alpha=0.25, facecolor='blue', edgecolor='blue')
 
     leg = plt.legend()
     font = {'family': 'Arial',

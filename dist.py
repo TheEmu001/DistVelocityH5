@@ -44,7 +44,8 @@ def distance_det(file, legend_label, line_color):
     data_df['deltay^2'] = data_df['|diff Y|']**2
 
     # adding deltaX^2 + deltaY^2
-    data_df['deltaSummed'] = (data_df['deltax^2'] + data_df['deltay^2'])*.03924
+    # data_df['deltaSummed'] = (data_df['deltax^2'] + data_df['deltay^2'])*.03924
+    data_df['deltaSummed'] = (data_df['deltax^2'] + data_df['deltay^2'])
 
     # taking square root of deltaX^2 + deltaY^2
     data_df['eucDist'] = data_df['deltaSummed']**(1/2)
@@ -99,7 +100,7 @@ if __name__ == '__main__':
     avg_df['Avg Dist Saline SEM'] = stats.sem(only_saline, axis=1)
     plt.plot(avg_df['Time'], avg_df['Avg Dist Saline'], color='black', linewidth=1, label='Average Dist Saline+Saline')
 
-    # """Naltrexone Data"""
+    """Naltrexone Data"""
     distance_det(file='Nalt_U50_Ai14_OPRK1_C1_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
                  legend_label='F2 Pretreat 3mgkg Naltrexone+5mgkg U50', line_color='darkred')
     distance_det(file='Nalt_U50_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
@@ -157,9 +158,15 @@ if __name__ == '__main__':
             legend_label='F1 10mgkg NORBNI+5mgkg U50', line_color='deepskyblue')
     distance_det(file='NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
             legend_label='F2 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
+    distance_det(file='NORBNI_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='M3 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
+    distance_det(file='NORBNI_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='M4 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
     only_NORBNI = avg_df.loc[:,
                ['NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
-                'NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5']]
+                'NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5']]
     avg_df['Avg Dist NORBNI'] = only_NORBNI.mean(axis=1)
     avg_df['Avg Dist NORBNI SEM'] = stats.sem(only_NORBNI, axis=1)
     plt.plot(avg_df['Time'], avg_df['Avg Dist NORBNI'], color='blue', linewidth=1,
@@ -180,7 +187,7 @@ if __name__ == '__main__':
     plt.fill_between(avg_df['Time'], avg_df["Avg Dist U50"]-avg_df["Avg Dist U50 SEM"],
                      avg_df["Avg Dist U50"]+avg_df["Avg Dist U50 SEM"], alpha=0.25, facecolor='orange')
     plt.fill_between(avg_df['Time'], avg_df["Avg Dist NORBNI"]-avg_df["Avg Dist NORBNI SEM"],
-                     avg_df["Avg Dist NORBNI"]+avg_df["Avg Dist NORBNI"], alpha=0.25, facecolor='blue', edgecolor='blue')
+                     avg_df["Avg Dist NORBNI"]+avg_df["Avg Dist NORBNI SEM"], alpha=0.25, facecolor='blue', edgecolor='blue')
 
     # plot formatting
     plt.xlabel('time (minutes)', fontsize=12)
