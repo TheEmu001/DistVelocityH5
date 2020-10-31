@@ -57,7 +57,7 @@ def vel_det(file, legend_label, line_color):
 
     # what's being plotted
     # plt.plot(data_df['Time Elapsed'], data_df['velocity_roll'], color=line_color, marker='o', markersize=0.4, linewidth=0.3, label=legend_label) # scatter plot with faint lines
-    # plt.plot(data_df['Time Elapsed']/60, data_df['velocity_roll'], color=line_color, linewidth=1, label=legend_label)
+    plt.plot(data_df['Time Elapsed']/60, data_df['velocity_roll'], color=line_color, linewidth=1, label=legend_label)
     # plot formatting
     # plt.xlabel('time (seconds)')
     # plt.ylabel('velocity (pixels/second)')
@@ -73,54 +73,53 @@ def vel_det(file, legend_label, line_color):
 if __name__ == '__main__':
 
     """Saline Data"""
-    vel_det(file='Saline_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='Saline_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='Saline M4', line_color='lightgreen')
-    vel_det(file='Saline_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='Saline_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='Saline M3', line_color='springgreen')
-    vel_det(file='Saline_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='Saline_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='Saline F1', line_color='seagreen')
-    vel_det(file='Saline_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='Saline_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='Saline M1', line_color='forestgreen')
-    vel_det(file='Saline_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='Saline_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='Saline M2', line_color='lime')
-    vel_det(file='Saline_Ai14_OPRK1_C1_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='Saline_Ai14_OPRK1_C1_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='Saline F0', line_color='yellowgreen')
-    vel_det(file='Saline_Ai14_OPRK1_C1_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='Saline_Ai14_OPRK1_C1_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='Saline F2', line_color='olivedrab')
-    only_saline = avg_df.loc[:, ['Saline_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                                 'Saline_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                                 'Saline_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                                 'Saline_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                                 'Saline_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                                 'Saline_Ai14_OPRK1_C1_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                                 'Saline_Ai14_OPRK1_C1_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5']]
+    only_saline = avg_df.loc[:, ['Saline_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                                 'Saline_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                                 'Saline_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                                 'Saline_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                                 'Saline_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                                 'Saline_Ai14_OPRK1_C1_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                                 'Saline_Ai14_OPRK1_C1_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5']]
     avg_df['Avg Vel Saline'] = only_saline.mean(axis=1)
     avg_df['Avg Vel Saline SEM'] = stats.sem(only_saline, axis=1)
     plt.plot(avg_df['Time'], avg_df['Avg Vel Saline'], color='black', linewidth=1, label='Average Velocity Saline+Saline')
 
     """Naltrexone Data"""
-    vel_det(file='Nalt_U50_Ai14_OPRK1_C1_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='Nalt_U50_Ai14_OPRK1_C1_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='F2 Pretreat 3mgkg Naltrexone+5mgkg U50', line_color='darkred')
-    vel_det(file='Nalt_U50_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='Nalt_U50_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='M2 Pretreat 3mgkg Naltrexone+5mgkg U50', line_color='lightcoral')
-    vel_det(file='Nalt_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='Nalt_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='M3 Pretreat 3mgkg Naltrexone+5mgkg U50', line_color='red')
-    vel_det(file='Nalt_U50_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='Nalt_U50_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='M1 Pretreat 3mgkg Naltrexone+5mgkg U50', line_color='firebrick')
-    vel_det(file='Nalt_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='Nalt_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='M4 Pretreat 3mgkg Naltrexone+5mkg U50', line_color='darksalmon')
-    vel_det(file='Naltr_U50_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='Naltr_U50_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='F0 Pretreat 3mkg Naltrexone+5mgkg U50', line_color='#ee4466')
-    vel_det(file='Nalt_U50_Ai14_OPRK1_C1_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='Nalt_U50_Ai14_OPRK1_C1_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='F1 Pretreat 3mgkg Naltrexone+5mgkg U50', line_color='orangered')
-    only_naltr = avg_df.loc[:,
-                 ['Nalt_U50_Ai14_OPRK1_C1_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                  'Nalt_U50_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                  'Nalt_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                  'Nalt_U50_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                  'Nalt_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                  'Naltr_U50_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                  'Nalt_U50_Ai14_OPRK1_C1_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5']]
+    only_naltr = avg_df.loc[:, ['Nalt_U50_Ai14_OPRK1_C1_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                                 'Nalt_U50_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                                 'Nalt_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                                'Nalt_U50_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                                'Nalt_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                                'Naltr_U50_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                                'Nalt_U50_Ai14_OPRK1_C1_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5']]
     avg_df['Avg Vel Naltr'] = only_naltr.mean(axis=1)
     avg_df['Avg Vel Naltr SEM'] = stats.sem(only_naltr, axis=1)
     plt.plot(avg_df['Time'], avg_df['Avg Vel Naltr'], color='red', linewidth=1, label='Average Velocity 3mgkg Naltr+5mgkg U50')
@@ -128,28 +127,27 @@ if __name__ == '__main__':
 
     """U50 Data"""
 
-    vel_det(file='U50_Ai14_OPRK1_C1_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='U50_Ai14_OPRK1_C1_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='F1 5mgkg U50', line_color='deepskyblue')
-    vel_det(file='U50_Ai14_OPRK1_C1_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-            legend_label='F0 5mgkg U50', line_color='steelblue')
-    vel_det(file='U50_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='U50_Ai14_OPRK1_C1_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='F0 5mgkg U50', line_color='steelblue')
+    vel_det(file='U50_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='M1 5mgkg U50', line_color='lightblue')
-    vel_det(file='U50_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='U50_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='M2 5mgkg U50', line_color='cornflowerblue')
-    vel_det(file='U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='F2 5mgkg U50', line_color='powderblue')
-    vel_det(file='U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='M3 5mgkg U50', line_color='aquamarine')
-    vel_det(file='U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
+    vel_det(file='U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='M4 5mgkg U50', line_color='turquoise')
-    only_U50 = avg_df.loc[:,
-               ['U50_Ai14_OPRK1_C1_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                'U50_Ai14_OPRK1_C1_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                'U50_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                'U50_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                'U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                'U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
-                'U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5']]
+    only_U50 = avg_df.loc[:, ['U50_Ai14_OPRK1_C1_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                                 'U50_Ai14_OPRK1_C1_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                                 'U50_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                                'U50_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                                'U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                              'U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                              'U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5']]
     avg_df['Avg Vel U50'] = only_U50.mean(axis=1)
     avg_df['Avg Vel U50 SEM'] = stats.sem(only_U50, axis=1)
     plt.plot(avg_df['Time'], avg_df['Avg Vel U50'], color='orange', linewidth=1, label='Average Velocity Saline+5mgkg U50')
@@ -157,34 +155,32 @@ if __name__ == '__main__':
 
     """NORBNI Data"""
 
-    vel_det(file='NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
+    vel_det(file='NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
             legend_label='F1 10mgkg NORBNI+5mgkg U50', line_color='deepskyblue')
-    vel_det(file='NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
+    vel_det(file='NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
             legend_label='F2 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
-    vel_det(file='NORBNI_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
-                 legend_label='M3 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
-    vel_det(file='NORBNI_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
-                 legend_label='M4 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
+    vel_det(file='NORBNI_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='M3 10mgkg NORBNI+5mgkg U50', line_color='blue')
+    vel_det(file='NORBNI_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='M4 10mgkg NORBNI+5mgkg U50', line_color='lightblue')
     only_NORBNI = avg_df.loc[:,
-               [
-                  'NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
-                'NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
-                'NORBNI_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
-                'NORBNI_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5'
-                ]]
+               ['NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5']]
     avg_df['Avg Vel NORBNI'] = only_NORBNI.mean(axis=1)
     avg_df['Avg Vel NORBNI SEM'] = stats.sem(only_NORBNI, axis=1)
     plt.plot(avg_df['Time'], avg_df['Avg Vel NORBNI'], color='blue', linewidth=1,
              label='Average Velocity 10mgkg NORBNI +5mgkg U50')
 
-    plt.fill_between(avg_df['Time'], avg_df["Avg Vel Saline"]-avg_df["Avg Vel Saline SEM"],
-                     avg_df["Avg Vel Saline"]+avg_df["Avg Vel Saline SEM"], alpha=0.25, facecolor='black', edgecolor='black')
-    plt.fill_between(avg_df['Time'], avg_df["Avg Vel Naltr"]-avg_df["Avg Vel Naltr SEM"],
-                     avg_df["Avg Vel Naltr"]+avg_df["Avg Vel Naltr SEM"], alpha=0.25, facecolor='red', edgecolor='red')
-    plt.fill_between(avg_df['Time'], avg_df["Avg Vel U50"]-avg_df["Avg Vel U50 SEM"],
-                     avg_df["Avg Vel U50"]+avg_df["Avg Vel U50 SEM"], alpha=0.25, facecolor='orange', edgecolor='orange')
-    plt.fill_between(avg_df['Time'], avg_df["Avg Vel NORBNI"]-avg_df["Avg Vel NORBNI SEM"],
-                     avg_df["Avg Vel NORBNI"]+avg_df["Avg Vel NORBNI SEM"], alpha=0.25, facecolor='blue', edgecolor='blue')
+    # plt.fill_between(avg_df['Time'], avg_df["Avg Vel Saline"]-avg_df["Avg Vel Saline SEM"],
+    #                  avg_df["Avg Vel Saline"]+avg_df["Avg Vel Saline SEM"], alpha=0.25, facecolor='black', edgecolor='black')
+    # plt.fill_between(avg_df['Time'], avg_df["Avg Vel Naltr"]-avg_df["Avg Vel Naltr SEM"],
+    #                  avg_df["Avg Vel Naltr"]+avg_df["Avg Vel Naltr SEM"], alpha=0.25, facecolor='red', edgecolor='red')
+    # plt.fill_between(avg_df['Time'], avg_df["Avg Vel U50"]-avg_df["Avg Vel U50 SEM"],
+    #                  avg_df["Avg Vel U50"]+avg_df["Avg Vel U50 SEM"], alpha=0.25, facecolor='orange', edgecolor='orange')
+    # plt.fill_between(avg_df['Time'], avg_df["Avg Vel NORBNI"]-avg_df["Avg Vel NORBNI SEM"],
+    #                  avg_df["Avg Vel NORBNI"]+avg_df["Avg Vel NORBNI SEM"], alpha=0.25, facecolor='blue', edgecolor='blue')
 
     leg = plt.legend()
     font = {'family': 'Arial',
