@@ -10,7 +10,7 @@ from scipy import stats
 np.set_printoptions(suppress=True)
 
 avg_df = pd.DataFrame(data=None, columns=['Time'])
-list_no = np.arange(0.0, 158400.0, 1.0)
+list_no = np.arange(0.0, 108000.0, 1.0)
 avg_df['Time'] = (list_no*(1/60))/60
 rolling_avg_duration= 10 #in seconds
 
@@ -46,7 +46,7 @@ def vel_det(file, legend_label, line_color):
     data_df['deltay^2'] = data_df['|diff Y|']**2
 
     # adding deltaX^2 + deltaY^2
-    data_df['deltaSummed'] = data_df['deltax^2'] + data_df['deltay^2']
+    data_df['deltaSummed'] = (data_df['deltax^2'] + data_df['deltay^2'])*.03924
 
     # taking square root of deltaX^2 + deltaY^2
     data_df['eucDist'] = data_df['deltaSummed']**(1/2)
@@ -96,7 +96,7 @@ if __name__ == '__main__':
                                  'Saline_Ai14_OPRK1_C1_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5']]
     avg_df['Avg Vel Saline'] = only_saline.mean(axis=1)
     avg_df['Avg Vel Saline SEM'] = stats.sem(only_saline, axis=1)
-    plt.plot(avg_df['Time'], avg_df['Avg Vel Saline'], color='green', linewidth=1, label='Average Velocity Saline+Saline')
+    plt.plot(avg_df['Time'], avg_df['Avg Vel Saline'], color='black', linewidth=1, label='Average Velocity Saline+Saline')
 
     """Naltrexone Data"""
     vel_det(file='Nalt_U50_Ai14_OPRK1_C1_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
@@ -152,19 +152,40 @@ if __name__ == '__main__':
                 'U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5']]
     avg_df['Avg Vel U50'] = only_U50.mean(axis=1)
     avg_df['Avg Vel U50 SEM'] = stats.sem(only_U50, axis=1)
-    plt.plot(avg_df['Time'], avg_df['Avg Vel U50'], color='blue', linewidth=1, label='Average Velocity Saline+5mgkg U50')
+    plt.plot(avg_df['Time'], avg_df['Avg Vel U50'], color='orange', linewidth=1, label='Average Velocity Saline+5mgkg U50')
+
+
+    """NORBNI Data"""
+
+    vel_det(file='NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+            legend_label='F1 10mgkg NORBNI+5mgkg U50', line_color='deepskyblue')
+    vel_det(file='NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+            legend_label='F2 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
+    only_NORBNI = avg_df.loc[:,
+               ['NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5']]
+    avg_df['Avg Vel NORBNI'] = only_NORBNI.mean(axis=1)
+    avg_df['Avg Vel NORBNI SEM'] = stats.sem(only_NORBNI, axis=1)
+    plt.plot(avg_df['Time'], avg_df['Avg Vel NORBNI'], color='blue', linewidth=1,
+             label='Average Velocity 10mgkg NORBNI +5mgkg U50')
 
     plt.fill_between(avg_df['Time'], avg_df["Avg Vel Saline"]-avg_df["Avg Vel Saline SEM"],
-                     avg_df["Avg Vel Saline"]+avg_df["Avg Vel Saline SEM"], alpha=0.25, facecolor='green')
+                     avg_df["Avg Vel Saline"]+avg_df["Avg Vel Saline SEM"], alpha=0.25, facecolor='black', edgecolor='black')
     plt.fill_between(avg_df['Time'], avg_df["Avg Vel Naltr"]-avg_df["Avg Vel Naltr SEM"],
-                     avg_df["Avg Vel Naltr"]+avg_df["Avg Vel Naltr SEM"], alpha=0.25, facecolor='red')
+                     avg_df["Avg Vel Naltr"]+avg_df["Avg Vel Naltr SEM"], alpha=0.25, facecolor='red', edgecolor='red')
     plt.fill_between(avg_df['Time'], avg_df["Avg Vel U50"]-avg_df["Avg Vel U50 SEM"],
-                     avg_df["Avg Vel U50"]+avg_df["Avg Vel U50 SEM"], alpha=0.25, facecolor='blue')
+                     avg_df["Avg Vel U50"]+avg_df["Avg Vel U50 SEM"], alpha=0.25, facecolor='orange', edgecolor='orange')
+    plt.fill_between(avg_df['Time'], avg_df["Avg Vel NORBNI"]-avg_df["Avg Vel NORBNI SEM"],
+                     avg_df["Avg Vel NORBNI"]+avg_df["Avg Vel NORBNI"], alpha=0.25, facecolor='blue', edgecolor='blue')
 
     leg = plt.legend()
+    font = {'family': 'Arial',
+            'size': 12}
+    plt.rc('font', **font)
+    plt.rc('lines', linewidth = 1)
     for i in leg.legendHandles:
         i.set_linewidth(3)
-    plt.xlabel('time (minutes)')
-    plt.ylabel('velocity (pixels/second)')
+    plt.xlabel('time (minutes)', fontsize=12)
+    plt.ylabel('velocity (cm/second)', fontsize=12)
     plt.title('Velocity vs Time, Rolling Average '+str(rolling_avg_duration)+" second interval")
     plt.show()

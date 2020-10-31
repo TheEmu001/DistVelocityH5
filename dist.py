@@ -10,7 +10,7 @@ from scipy import stats
 np.set_printoptions(suppress=True)
 
 avg_df = pd.DataFrame(data=None, columns=['Time'])
-list_no = np.arange(0.0, 158400.0, 1.0)
+list_no = np.arange(0.0, 108060.0, 1.0)
 avg_df['Time'] = (list_no*(1/60))/60
 
 def distance_det(file, legend_label, line_color):
@@ -44,7 +44,7 @@ def distance_det(file, legend_label, line_color):
     data_df['deltay^2'] = data_df['|diff Y|']**2
 
     # adding deltaX^2 + deltaY^2
-    data_df['deltaSummed'] = data_df['deltax^2'] + data_df['deltay^2']
+    data_df['deltaSummed'] = (data_df['deltax^2'] + data_df['deltay^2'])*.03924
 
     # taking square root of deltaX^2 + deltaY^2
     data_df['eucDist'] = data_df['deltaSummed']**(1/2)
@@ -97,7 +97,7 @@ if __name__ == '__main__':
                                  'Saline_Ai14_OPRK1_C1_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5']]
     avg_df['Avg Dist Saline'] = only_saline.mean(axis=1)
     avg_df['Avg Dist Saline SEM'] = stats.sem(only_saline, axis=1)
-    plt.plot(avg_df['Time'], avg_df['Avg Dist Saline'], color='green', linewidth=1, label='Average Dist Saline+Saline')
+    plt.plot(avg_df['Time'], avg_df['Avg Dist Saline'], color='black', linewidth=1, label='Average Dist Saline+Saline')
 
     # """Naltrexone Data"""
     distance_det(file='Nalt_U50_Ai14_OPRK1_C1_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5',
@@ -151,26 +151,47 @@ if __name__ == '__main__':
                               'U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered - Copy.h5']]
     avg_df['Avg Dist U50'] = only_U50.mean(axis=1)
     avg_df['Avg Dist U50 SEM'] = stats.sem(only_U50, axis=1)
-    plt.rc('font', family='Arial')
-    plt.plot(avg_df['Time'], avg_df['Avg Dist U50'], color='blue', linewidth=1, label='Average Dist Saline+5mgkg U50')
+    plt.plot(avg_df['Time'], avg_df['Avg Dist U50'], color='orange', linewidth=1, label='Average Dist Saline+5mgkg U50')
+
+    distance_det(file='NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+            legend_label='F1 10mgkg NORBNI+5mgkg U50', line_color='deepskyblue')
+    distance_det(file='NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+            legend_label='F2 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
+    only_NORBNI = avg_df.loc[:,
+               ['NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5']]
+    avg_df['Avg Dist NORBNI'] = only_NORBNI.mean(axis=1)
+    avg_df['Avg Dist NORBNI SEM'] = stats.sem(only_NORBNI, axis=1)
+    plt.plot(avg_df['Time'], avg_df['Avg Dist NORBNI'], color='blue', linewidth=1,
+             label='Average Distance 10mgkg NORBNI +5mgkg U50')
+
+
+    """Graph formatting"""
+    font = {'family': 'Arial',
+            'size': 12}
+    plt.rc('font', **font)
+    plt.rc('lines', linewidth = 1)
+
 
     plt.fill_between(avg_df['Time'], avg_df["Avg Dist Saline"]-avg_df["Avg Dist Saline SEM"],
-                     avg_df["Avg Dist Saline"]+avg_df["Avg Dist Saline SEM"], alpha=0.25, facecolor='green')
+                     avg_df["Avg Dist Saline"]+avg_df["Avg Dist Saline SEM"], alpha=0.25, facecolor='black')
     plt.fill_between(avg_df['Time'], avg_df["Avg Dist Naltr"]-avg_df["Avg Dist Naltr SEM"],
                      avg_df["Avg Dist Naltr"]+avg_df["Avg Dist Naltr SEM"], alpha=0.25, facecolor='red')
     plt.fill_between(avg_df['Time'], avg_df["Avg Dist U50"]-avg_df["Avg Dist U50 SEM"],
-                     avg_df["Avg Dist U50"]+avg_df["Avg Dist U50 SEM"], alpha=0.25, facecolor='blue')
+                     avg_df["Avg Dist U50"]+avg_df["Avg Dist U50 SEM"], alpha=0.25, facecolor='orange')
+    plt.fill_between(avg_df['Time'], avg_df["Avg Dist NORBNI"]-avg_df["Avg Dist NORBNI SEM"],
+                     avg_df["Avg Dist NORBNI"]+avg_df["Avg Dist NORBNI"], alpha=0.25, facecolor='blue', edgecolor='blue')
 
     # plot formatting
-    plt.xlabel('time (minutes)', fontname='Arial', fontsize=12)
-    plt.ylabel('distance travelled (pixels)', fontname='Arial', fontsize=12)
+    plt.xlabel('time (minutes)', fontsize=12)
+    plt.ylabel('distance travelled (cm)', fontsize=12)
     plt.legend(loc=2)
-    plt.title('Average Cummulative Distance vs Time', fontname='Arial', fontsize=12)
+    plt.title('Average Cummulative Distance vs Time', fontsize=12)
     leg = plt.legend()
     for i in leg.legendHandles:
         i.set_linewidth(3)
 
-    
+    print(avg_df.max())
     plt.show()
 
     # plt.savefig('generated_figs\Cummulative Distance.eps', format='eps')
