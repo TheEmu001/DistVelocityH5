@@ -155,7 +155,7 @@ if __name__ == '__main__':
     plt.plot(avg_df['Time'], avg_df['Avg Vel U50'], color='orange', linewidth=1, label='Average Velocity Saline+5mgkg U50')
 
 
-    """NORBNI Data"""
+    """NORBNI U50 Data"""
 
     vel_det(file='NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
             legend_label='F1 10mgkg NORBNI+5mgkg U50', line_color='deepskyblue')
@@ -176,6 +176,9 @@ if __name__ == '__main__':
     avg_df['Avg Vel NORBNI SEM'] = stats.sem(only_NORBNI, axis=1)
     plt.plot(avg_df['Time'], avg_df['Avg Vel NORBNI'], color='blue', linewidth=1,
              label='Average Velocity 10mgkg NORBNI +5mgkg U50')
+
+    """NORBNI Saline"""
+
 
     plt.fill_between(avg_df['Time'], avg_df["Avg Vel Saline"]-avg_df["Avg Vel Saline SEM"],
                      avg_df["Avg Vel Saline"]+avg_df["Avg Vel Saline SEM"], alpha=0.25, facecolor='black', edgecolor='black')
