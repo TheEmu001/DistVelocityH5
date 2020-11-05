@@ -57,7 +57,7 @@ def vel_det(file, legend_label, line_color):
 
     # what's being plotted
     # plt.plot(data_df['Time Elapsed'], data_df['velocity_roll'], color=line_color, marker='o', markersize=0.4, linewidth=0.3, label=legend_label) # scatter plot with faint lines
-    plt.plot(data_df['Time Elapsed']/60, data_df['velocity_roll'], color=line_color, linewidth=1, label=legend_label)
+    # plt.plot(data_df['Time Elapsed']/60, data_df['velocity_roll'], color=line_color, linewidth=1, label=legend_label)
     # plot formatting
     # plt.xlabel('time (seconds)')
     # plt.ylabel('velocity (pixels/second)')
@@ -153,25 +153,86 @@ if __name__ == '__main__':
     plt.plot(avg_df['Time'], avg_df['Avg Vel U50'], color='orange', linewidth=1, label='Average Velocity Saline+5mgkg U50')
 
 
-    """NORBNI Data"""
+    # """NORBNI Data"""
+    #
+    # vel_det(file='NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+    #         legend_label='F1 10mgkg NORBNI+5mgkg U50', line_color='deepskyblue')
+    # vel_det(file='NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+    #         legend_label='F2 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
+    # vel_det(file='NORBNI_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+    #              legend_label='M3 10mgkg NORBNI+5mgkg U50', line_color='blue')
+    # vel_det(file='NORBNI_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+    #              legend_label='M4 10mgkg NORBNI+5mgkg U50', line_color='lightblue')
+    # only_NORBNI = avg_df.loc[:,
+    #            ['NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+    #             'NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+    #             'NORBNI_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+    #             'NORBNI_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5']]
+    # avg_df['Avg Vel NORBNI'] = only_NORBNI.mean(axis=1)
+    # avg_df['Avg Vel NORBNI SEM'] = stats.sem(only_NORBNI, axis=1)
+    # plt.plot(avg_df['Time'], avg_df['Avg Vel NORBNI'], color='blue', linewidth=1,
+    #          label='Average Velocity 10mgkg NORBNI +5mgkg U50')
 
+    """NORBNI+ U50"""
+    vel_det(file='NORBNI_U50_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='FO 10mgkg NORBNI+5mgkg U50', line_color='blue')
     vel_det(file='NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
             legend_label='F1 10mgkg NORBNI+5mgkg U50', line_color='deepskyblue')
     vel_det(file='NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
             legend_label='F2 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
+
+    vel_det(file='NORBNI_U50_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='M1 10mgkg NORBNI+5mgkg U50', line_color='blue')
+    vel_det(file='NORBNI_U50_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='M2 10mgkg NORBNI+5mgkg U50', line_color='blue')
     vel_det(file='NORBNI_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
-                 legend_label='M3 10mgkg NORBNI+5mgkg U50', line_color='blue')
+                 legend_label='M3 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
     vel_det(file='NORBNI_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
-                 legend_label='M4 10mgkg NORBNI+5mgkg U50', line_color='lightblue')
+                 legend_label='M4 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
     only_NORBNI = avg_df.loc[:,
-               ['NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+               ['NORBNI_U50_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_U50_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                 'NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_U50_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_U50_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                 'NORBNI_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                 'NORBNI_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5']]
     avg_df['Avg Vel NORBNI'] = only_NORBNI.mean(axis=1)
     avg_df['Avg Vel NORBNI SEM'] = stats.sem(only_NORBNI, axis=1)
     plt.plot(avg_df['Time'], avg_df['Avg Vel NORBNI'], color='blue', linewidth=1,
-             label='Average Velocity 10mgkg NORBNI +5mgkg U50')
+             label='Average Vel 10mgkg NORBNI +5mgkg U50')
+
+
+    """NORBNI+ Saline"""
+    vel_det(file='NORBNI_Saline_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='FO 10mgkg NORBNI+Saline', line_color='blue')
+    vel_det(file='NORBNI_Saline_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+            legend_label='F1 10mgkg NORBNI+Saline', line_color='deepskyblue')
+    vel_det(file='NORBNI_Saline_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+            legend_label='F2 10mgkg NORBNI+Saline', line_color='steelblue')
+
+    vel_det(file='NORBNI_Saline_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='M1 10mgkg NORBNI+Saline', line_color='blue')
+    vel_det(file='NORBNI_Saline_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='M2 10mgkg NORBNI+Saline', line_color='blue')
+    vel_det(file='NORBNI_Saline_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='M3 10mgkg NORBNI+Saline', line_color='steelblue')
+    vel_det(file='NORBNI_Saline_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='M4 10mgkg NORBNI+Saline', line_color='steelblue')
+    only_NORBNI_Saline = avg_df.loc[:,
+               ['NORBNI_Saline_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_Saline_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_Saline_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_Saline_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_Saline_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_Saline_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_Saline_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5']]
+    avg_df['Avg Dist NORBNI+Saline'] = only_NORBNI_Saline.mean(axis=1)
+    avg_df['Avg Dist NORBNI+Saline SEM'] = stats.sem(only_NORBNI_Saline, axis=1)
+    plt.plot(avg_df['Time'], avg_df['Avg Dist NORBNI+Saline'], color='purple', linewidth=1,
+             label='Average Distance 10mgkg NORBNI +Saline')
+
+
 
     # plt.fill_between(avg_df['Time'], avg_df["Avg Vel Saline"]-avg_df["Avg Vel Saline SEM"],
     #                  avg_df["Avg Vel Saline"]+avg_df["Avg Vel Saline SEM"], alpha=0.25, facecolor='black', edgecolor='black')
@@ -181,7 +242,8 @@ if __name__ == '__main__':
     #                  avg_df["Avg Vel U50"]+avg_df["Avg Vel U50 SEM"], alpha=0.25, facecolor='orange', edgecolor='orange')
     # plt.fill_between(avg_df['Time'], avg_df["Avg Vel NORBNI"]-avg_df["Avg Vel NORBNI SEM"],
     #                  avg_df["Avg Vel NORBNI"]+avg_df["Avg Vel NORBNI SEM"], alpha=0.25, facecolor='blue', edgecolor='blue')
-
+    # plt.fill_between(avg_df['Time'], avg_df["Avg Vel NORBNI+Saline"]-avg_df["Avg Vel NORBNI+Saline SEM"],
+    #                  avg_df["Avg Vel NORBNI+Saline"]+avg_df["Avg Vel NORBNI+Saline SEM"], alpha=0.25, facecolor='purple', edgecolor='purple')
     leg = plt.legend()
     font = {'family': 'Arial',
             'size': 12}

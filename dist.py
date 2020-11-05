@@ -154,17 +154,28 @@ if __name__ == '__main__':
     avg_df['Avg Dist U50 SEM'] = stats.sem(only_U50, axis=1)
     plt.plot(avg_df['Time'], avg_df['Avg Dist U50'], color='orange', linewidth=1, label='Average Dist Saline+5mgkg U50')
 
+    """NORBNI+ U50"""
+    distance_det(file='NORBNI_U50_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='FO 10mgkg NORBNI+5mgkg U50', line_color='blue')
     distance_det(file='NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
             legend_label='F1 10mgkg NORBNI+5mgkg U50', line_color='deepskyblue')
     distance_det(file='NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
             legend_label='F2 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
+
+    distance_det(file='NORBNI_U50_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='M1 10mgkg NORBNI+5mgkg U50', line_color='blue')
+    distance_det(file='NORBNI_U50_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='M2 10mgkg NORBNI+5mgkg U50', line_color='blue')
     distance_det(file='NORBNI_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='M3 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
     distance_det(file='NORBNI_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='M4 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
     only_NORBNI = avg_df.loc[:,
-               ['NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+               ['NORBNI_U50_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_U50_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                 'NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_U50_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_U50_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                 'NORBNI_U50_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                 'NORBNI_U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5']]
     avg_df['Avg Dist NORBNI'] = only_NORBNI.mean(axis=1)
@@ -172,6 +183,35 @@ if __name__ == '__main__':
     plt.plot(avg_df['Time'], avg_df['Avg Dist NORBNI'], color='blue', linewidth=1,
              label='Average Distance 10mgkg NORBNI +5mgkg U50')
 
+
+    """NORBNI+ Saline"""
+    distance_det(file='NORBNI_Saline_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='FO 10mgkg NORBNI+Saline', line_color='blue')
+    distance_det(file='NORBNI_Saline_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+            legend_label='F1 10mgkg NORBNI+Saline', line_color='deepskyblue')
+    distance_det(file='NORBNI_Saline_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+            legend_label='F2 10mgkg NORBNI+Saline', line_color='steelblue')
+
+    distance_det(file='NORBNI_Saline_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='M1 10mgkg NORBNI+Saline', line_color='blue')
+    distance_det(file='NORBNI_Saline_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='M2 10mgkg NORBNI+Saline', line_color='blue')
+    distance_det(file='NORBNI_Saline_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='M3 10mgkg NORBNI+Saline', line_color='steelblue')
+    distance_det(file='NORBNI_Saline_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                 legend_label='M4 10mgkg NORBNI+Saline', line_color='steelblue')
+    only_NORBNI_Saline = avg_df.loc[:,
+               ['NORBNI_Saline_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_Saline_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_Saline_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_Saline_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_Saline_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_Saline_Ai14_OPRK1_C1_M3_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_Saline_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5']]
+    avg_df['Avg Dist NORBNI+Saline'] = only_NORBNI_Saline.mean(axis=1)
+    avg_df['Avg Dist NORBNI+Saline SEM'] = stats.sem(only_NORBNI_Saline, axis=1)
+    plt.plot(avg_df['Time'], avg_df['Avg Dist NORBNI+Saline'], color='purple', linewidth=1,
+             label='Average Distance 10mgkg NORBNI +Saline')
 
     """Graph formatting"""
     font = {'family': 'Arial',
@@ -188,6 +228,8 @@ if __name__ == '__main__':
                      avg_df["Avg Dist U50"]+avg_df["Avg Dist U50 SEM"], alpha=0.25, facecolor='orange')
     plt.fill_between(avg_df['Time'], avg_df["Avg Dist NORBNI"]-avg_df["Avg Dist NORBNI SEM"],
                      avg_df["Avg Dist NORBNI"]+avg_df["Avg Dist NORBNI SEM"], alpha=0.25, facecolor='blue', edgecolor='blue')
+    plt.fill_between(avg_df['Time'], avg_df["Avg Dist NORBNI+Saline"]-avg_df["Avg Dist NORBNI+Saline SEM"],
+                     avg_df["Avg Dist NORBNI+Saline"]+avg_df["Avg Dist NORBNI+Saline SEM"], alpha=0.25, facecolor='purple', edgecolor='purple')
 
     # plot formatting
     plt.xlabel('time (minutes)', fontsize=12)
