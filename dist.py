@@ -44,11 +44,11 @@ def distance_det(file, legend_label, line_color):
     data_df['deltay^2'] = data_df['|diff Y|']**2
 
     # adding deltaX^2 + deltaY^2
-    # data_df['deltaSummed'] = (data_df['deltax^2'] + data_df['deltay^2'])*.03924
+    # data_df['deltaSummed'] = (data_df['deltax^2'] + data_df['deltay^2'])
     data_df['deltaSummed'] = (data_df['deltax^2'] + data_df['deltay^2'])
 
     # taking square root of deltaX^2 + deltaY^2
-    data_df['eucDist'] = data_df['deltaSummed']**(1/2)
+    data_df['eucDist'] = (data_df['deltaSummed']**(1/2))*.03924
     data_df['eucDistSum'] = data_df['eucDist'].cumsum()
 
     print(data_df)
@@ -172,7 +172,7 @@ if __name__ == '__main__':
                  legend_label='M4 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
     only_NORBNI = avg_df.loc[:,
                ['NORBNI_U50_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
-                'NORBNI_U50_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                 'NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                 'NORBNI_U50_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                 'NORBNI_U50_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
@@ -187,7 +187,7 @@ if __name__ == '__main__':
     """NORBNI+ Saline"""
     distance_det(file='NORBNI_Saline_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                  legend_label='FO 10mgkg NORBNI+Saline', line_color='blue')
-    distance_det(file='NORBNI_Saline_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+    distance_det(file='NORBNI_Saline_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
             legend_label='F1 10mgkg NORBNI+Saline', line_color='deepskyblue')
     distance_det(file='NORBNI_Saline_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
             legend_label='F2 10mgkg NORBNI+Saline', line_color='steelblue')
@@ -202,7 +202,7 @@ if __name__ == '__main__':
                  legend_label='M4 10mgkg NORBNI+Saline', line_color='steelblue')
     only_NORBNI_Saline = avg_df.loc[:,
                ['NORBNI_Saline_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
-                'NORBNI_Saline_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
+                'NORBNI_Saline_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                 'NORBNI_Saline_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                 'NORBNI_Saline_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
                 'NORBNI_Saline_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000.h5',
@@ -235,12 +235,12 @@ if __name__ == '__main__':
     plt.xlabel('time (minutes)', fontsize=12)
     plt.ylabel('distance travelled (cm)', fontsize=12)
     plt.legend(loc=2)
-    plt.title('Average Cummulative Distance vs Time', fontsize=12)
+    plt.title('Average Cummulative Distance vs Time [Unfiltered]', fontsize=12)
     leg = plt.legend()
     for i in leg.legendHandles:
         i.set_linewidth(3)
 
-    print(avg_df.max())
-    plt.show()
 
+    plt.show()
+    print(avg_df.max())
     # plt.savefig('generated_figs\Cummulative Distance.eps', format='eps')
