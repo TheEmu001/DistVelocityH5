@@ -85,7 +85,7 @@ if __name__ == '__main__':
                  legend_label='Saline M1', line_color='forestgreen')
     distance_det(file='Saline_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
                  legend_label='Saline M2', line_color='lime')
-    distance_det(file='Saline_Ai14_OPRK1_C1_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
+    distance_det(file='U50_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
                  legend_label='Saline F0', line_color='yellowgreen')
     distance_det(file='Saline_Ai14_OPRK1_C1_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
                  legend_label='Saline F2', line_color='olivedrab')
@@ -94,7 +94,7 @@ if __name__ == '__main__':
                                  'Saline_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
                                  'Saline_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
                                  'Saline_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
-                                 'Saline_Ai14_OPRK1_C1_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
+                                 'U50_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
                                  'Saline_Ai14_OPRK1_C1_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5']]
     avg_df['Avg Dist Saline'] = only_saline.mean(axis=1)
     avg_df['Avg Dist Saline SEM'] = stats.sem(only_saline, axis=1)
@@ -131,7 +131,7 @@ if __name__ == '__main__':
 
     distance_det(file='U50_Ai14_OPRK1_C1_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
                  legend_label='F1 5mgkg U50', line_color='deepskyblue')
-    distance_det(file='U50_Ai14_OPRK1_C1_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
+    distance_det(file='Saline_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
                  legend_label='F0 5mgkg U50', line_color='steelblue')
     distance_det(file='U50_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
                  legend_label='M1 5mgkg U50', line_color='lightblue')
@@ -144,7 +144,7 @@ if __name__ == '__main__':
     distance_det(file='U50_Ai14_OPRK1_C1_M4_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
                  legend_label='M4 5mgkg U50', line_color='turquoise')
     only_U50 = avg_df.loc[:, ['U50_Ai14_OPRK1_C1_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
-                                 'U50_Ai14_OPRK1_C1_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
+                                 'Saline_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
                                  'U50_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
                                 'U50_Ai14_OPRK1_C1_M2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
                                 'U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',

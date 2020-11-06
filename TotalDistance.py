@@ -56,41 +56,66 @@ def velocity(video, color, label):
 
 if __name__ == '__main__':
     """
-    Naltrexone U50
+    Saline
     """
-    velocity(video='Nalt_U50_Ai14_OPRK1_C2_F0_Top Down', color='red', label='F0 3mgkg Nalt+5mgkg U50')
-    velocity(video='Nalt_U50_Ai14_OPRK1_C2_F1_Top Down', color='blue', label='F1 3mgkg Nalt+5mgkg U50')
-    velocity(video='Nalt_U50_Ai14_OPRK1_C2_F2_Top Down', color='green', label='F2 3mgkg Nalt+5mgkg U50')
+    velocity(video='Saline_Ai14_OPRK1_C2_F0_Top Down', color='pink', label='F0 Saline')
+    velocity(video='Saline_Ai14_OPRK1_C2_F1_Top Down', color='pink', label='F1 Saline')
+    velocity(video='Saline_Ai14_OPRK1_C1_F2_Top Down', color='pink', label='F2 Saline')
 
-    velocity(video='Nalt_U50_Ai14_OPRK1_C1_M1_Top Down', color='orange', label='M1 3mgkg Nalt+5mgkg U50')
-    velocity(video='Nalt_U50_Ai14_OPRK1_C1_M2_Top Down', color='pink', label='M2 3mgkg Nalt+5mgkg U50')
-    velocity(video='Nalt_U50_Ai14_OPRK1_C1_M3_Top Down', color='purple', label='M3 3mgkg Nalt+5mgkg U50')
-    velocity(video='Nalt_U50_Ai14_OPRK1_C1_M4_Top Down', color='black', label='M4 3mgkg Nalt+5mgkg U50')
-
-
-    """
-    NORBNI U50
-    """
-    velocity(video='NORBNI_U50_Ai14_OPRK1_C2_F0_Top Down', color='red', label='F0 10mgkg NORBNI+5mgkg U50')
-    velocity(video='NORBNI_U50_Ai14_OPRK1_C2_F1_Top Down', color='blue', label='F1 10mgkg NORBNI+5mgkg U50')
-    velocity(video='NORBNI_U50_Ai14_OPRK1_C2_F2_Top Down', color='green', label='F2 10mgkg NORBNI+5mgkg U50')
-
-    velocity(video='NORBNI_U50_Ai14_OPRK1_C1_M1_Top Down', color='orange', label='M1 10mgkg NORBNI+5mgkg U50')
-    velocity(video='NORBNI_U50_Ai14_OPRK1_C1_M2_Top Down', color='pink', label='M2 10mgkg NORBNI+5mgkg U50')
-    velocity(video='NORBNI_U50_Ai14_OPRK1_C1_M3_Top Down', color='purple', label='M3 10mgkg NORBNI+5mgkg U50')
-    velocity(video='NORBNI_U50_Ai14_OPRK1_C1_M4_Top Down', color='black', label='M4 10mgkg NORBNI+5mgkg U50')
+    velocity(video='Saline_Ai14_OPRK1_C1_M1_Top Down', color='pink', label='M1 Saline')
+    velocity(video='Saline_Ai14_OPRK1_C1_M2_Top Down', color='pink', label='M2 Saline')
+    velocity(video='Saline_Ai14_OPRK1_C1_M3_Top Down', color='pink', label='M3 Saline')
+    velocity(video='Saline_Ai14_OPRK1_C1_M4_Top Down', color='pink', label='M4 Saline')
 
     """
-    NORBNI U50 + Saline
+    U50
     """
-    velocity(video='NORBNI_Saline_Ai14_OPRK1_C2_F0_Top Down', color='red', label='F0 10mgkg NORBNI+Saline')
-    velocity(video='NORBNI_Saline_Ai14_OPRK1_C2_F1_Top Down', color='blue', label='F1 10mgkg NORBNI+Saline')
-    velocity(video='NORBNI_Saline_Ai14_OPRK1_C2_F2_Top Down', color='green', label='F2 10mgkg NORBNI+Saline')
+    velocity(video='U50_Ai14_OPRK1_C2_F0_Top Down', color='orange', label='F0 Saline+5mgkg U50')
+    velocity(video='U50_Ai14_OPRK1_C1_F1_Top Down', color='orange', label='F1 Saline+5mgkg U50')
+    velocity(video='U50_Ai14_OPRK1_C2_F2_Top Down', color='orange', label='F2 Saline+5mgkg U50')
 
-    velocity(video='NORBNI_Saline_Ai14_OPRK1_C1_M1_Top Down', color='orange', label='M1 10mgkg NORBNI+Saline')
-    velocity(video='NORBNI_Saline_Ai14_OPRK1_C1_M2_Top Down', color='pink', label='M2 10mgkg NORBNI+Saline')
-    velocity(video='NORBNI_Saline_Ai14_OPRK1_C1_M3_Top Down', color='purple', label='M3 10mgkg NORBNI+Saline')
-    velocity(video='NORBNI_Saline_Ai14_OPRK1_C1_M4_Top Down', color='black', label='M4 10mgkg NORBNI+Saline')
+    velocity(video='U50_Ai14_OPRK1_C1_M1_Top Down', color='orange', label='M1 Saline+5mgkg U50')
+    velocity(video='U50_Ai14_OPRK1_C1_M2_Top Down', color='orange', label='M2 Saline+5mgkg U50')
+    velocity(video='U50_Ai14_OPRK1_C1_M3_Top Down', color='orange', label='M3 Saline+5mgkg U50')
+    velocity(video='U50_Ai14_OPRK1_C1_M4_Top Down', color='orange', label='M4 Saline+5mgkg U50')
+    #
+    #
+    # """
+    # Naltrexone U50
+    # """
+    # velocity(video='Naltr_U50_Ai14_OPRK1_C2_F0_Top Down', color='red', label='F0 3mgkg Nalt+5mgkg U50')
+    # velocity(video='Nalt_U50_Ai14_OPRK1_C1_F1_Top Down', color='red', label='F1 3mgkg Nalt+5mgkg U50')
+    # velocity(video='Nalt_U50_Ai14_OPRK1_C1_F2_Top Down', color='red', label='F2 3mgkg Nalt+5mgkg U50')
+    #
+    # velocity(video='Nalt_U50_Ai14_OPRK1_C1_M1_Top Down', color='red', label='M1 3mgkg Nalt+5mgkg U50')
+    # velocity(video='Nalt_U50_Ai14_OPRK1_C1_M2_Top Down', color='red', label='M2 3mgkg Nalt+5mgkg U50')
+    # velocity(video='Nalt_U50_Ai14_OPRK1_C1_M3_Top Down', color='red', label='M3 3mgkg Nalt+5mgkg U50')
+    # velocity(video='Nalt_U50_Ai14_OPRK1_C1_M4_Top Down', color='red', label='M4 3mgkg Nalt+5mgkg U50')
+    #
+    #
+    # """
+    # NORBNI U50
+    # """
+    # velocity(video='NORBNI_U50_Ai14_OPRK1_C2_F0_Top Down', color='blue', label='F0 10mgkg NORBNI+5mgkg U50')
+    # velocity(video='NORBNI_U50_Ai14_OPRK1_C2_F1_Top Down', color='blue', label='F1 10mgkg NORBNI+5mgkg U50')
+    # velocity(video='NORBNI_U50_Ai14_OPRK1_C2_F2_Top Down', color='blue', label='F2 10mgkg NORBNI+5mgkg U50')
+    #
+    # velocity(video='NORBNI_U50_Ai14_OPRK1_C1_M1_Top Down', color='blue', label='M1 10mgkg NORBNI+5mgkg U50')
+    # velocity(video='NORBNI_U50_Ai14_OPRK1_C1_M2_Top Down', color='blue', label='M2 10mgkg NORBNI+5mgkg U50')
+    # velocity(video='NORBNI_U50_Ai14_OPRK1_C1_M3_Top Down', color='blue', label='M3 10mgkg NORBNI+5mgkg U50')
+    # velocity(video='NORBNI_U50_Ai14_OPRK1_C1_M4_Top Down', color='blue', label='M4 10mgkg NORBNI+5mgkg U50')
+    #
+    # """
+    # NORBNI U50 + Saline
+    # """
+    # velocity(video='NORBNI_Saline_Ai14_OPRK1_C2_F0_Top Down', color='purple', label='F0 10mgkg NORBNI+Saline')
+    # velocity(video='NORBNI_Saline_Ai14_OPRK1_C2_F1_Top Down', color='purple', label='F1 10mgkg NORBNI+Saline')
+    # velocity(video='NORBNI_Saline_Ai14_OPRK1_C2_F2_Top Down', color='purple', label='F2 10mgkg NORBNI+Saline')
+    #
+    # velocity(video='NORBNI_Saline_Ai14_OPRK1_C1_M1_Top Down', color='purple', label='M1 10mgkg NORBNI+Saline')
+    # velocity(video='NORBNI_Saline_Ai14_OPRK1_C1_M2_Top Down', color='purple', label='M2 10mgkg NORBNI+Saline')
+    # velocity(video='NORBNI_Saline_Ai14_OPRK1_C1_M3_Top Down', color='purple', label='M3 10mgkg NORBNI+Saline')
+    # velocity(video='NORBNI_Saline_Ai14_OPRK1_C1_M4_Top Down', color='purple', label='M4 10mgkg NORBNI+Saline')
 
 
     '-----------------------------------------------------------------------------------------------------------'
