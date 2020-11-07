@@ -158,9 +158,9 @@ if __name__ == '__main__':
     distance_det(file='NORBNI_U50_Ai14_OPRK1_C2_F0_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
                  legend_label='FO 10mgkg NORBNI+5mgkg U50', line_color='blue')
     distance_det(file='NORBNI_U50_Ai14_OPRK1_C2_F1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
-            legend_label='F1 10mgkg NORBNI+5mgkg U50', line_color='deepskyblue')
+                 legend_label='F1 10mgkg NORBNI+5mgkg U50', line_color='deepskyblue')
     distance_det(file='NORBNI_U50_Ai14_OPRK1_C2_F2_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
-            legend_label='F2 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
+                 legend_label='F2 10mgkg NORBNI+5mgkg U50', line_color='steelblue')
 
     distance_det(file='NORBNI_U50_Ai14_OPRK1_C1_M1_Top DownDLC_resnet50_BigBinTopSep17shuffle1_250000filtered.h5',
                  legend_label='M1 10mgkg NORBNI+5mgkg U50', line_color='blue')

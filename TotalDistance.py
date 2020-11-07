@@ -14,12 +14,19 @@ from scipy import integrate
 warnings.filterwarnings('ignore')
 
 all_data = pd.DataFrame(columns=['init'])
+list_no = np.arange(0.0, 108060.0, 1.0) #number of frames in 30 minutes
+# list_no = np.arange(0.0, 180000, 1.0) #number of frames in 50 minutes
+
+# frame rate of camera in those experiments
+fps = 60
+no_seconds = 10
+moving_average_duration_frames = fps * no_seconds
 
 DLCscorer = 'DLC_resnet50_BigBinTopSep17shuffle1_250000'
-no_seconds = 10
+
 def velocity(video, color, label):
 
-    dataname = str(Path(video).stem) + DLCscorer + '.h5'
+    dataname = str(Path(video).stem) + DLCscorer + 'filtered.h5'
     print(dataname)
 
     #loading output of DLC
@@ -36,9 +43,7 @@ def velocity(video, color, label):
     bpt='head'
     vel = time_in_each_roi.calc_distance_between_points_in_a_vector_2d(np.vstack([Dataframe[DLCscorer][bpt]['x'].values.flatten(), Dataframe[DLCscorer][bpt]['y'].values.flatten()]).T)
 
-    # frame rate of camera in those experiments
-    fps=60
-    moving_average_duration_frames = fps * no_seconds
+
     time=np.arange(len(vel))*1./fps
     #notice the units of vel are relative pixel distance [per time step]
     vel=vel*.03924
@@ -50,11 +55,16 @@ def velocity(video, color, label):
 
 
     # plt.plot(time, vel_avg, color=color, label=label) #instantaneous velocity plot
-    plt.plot(time, dist_sum, color=color) #cummulative distance plot
+    # plt.plot(time, dist_sum, color=color) #cummulative distance plot
+    all_data[video+"_dist"] = dist_sum[:108060]
+    all_data[video+"_vel"] = vel_avg[:108060]
+
 
 
 
 if __name__ == '__main__':
+    all_data['time'] = (list_no * (1 / 60)) / 60
+
     """
     Saline
     """
@@ -66,6 +76,34 @@ if __name__ == '__main__':
     velocity(video='Saline_Ai14_OPRK1_C1_M2_Top Down', color='pink', label='M2 Saline')
     velocity(video='Saline_Ai14_OPRK1_C1_M3_Top Down', color='pink', label='M3 Saline')
     velocity(video='Saline_Ai14_OPRK1_C1_M4_Top Down', color='pink', label='M4 Saline')
+
+    # saline_avg_dist = all_data.loc[:,
+    #            ['Saline_Ai14_OPRK1_C2_F0_Top Down_dist',
+    #             'Saline_Ai14_OPRK1_C2_F1_Top Down_dist',
+    #             'Saline_Ai14_OPRK1_C1_F2_Top Down_dist',
+    #             'Saline_Ai14_OPRK1_C1_M1_Top Down_dist',
+    #             'Saline_Ai14_OPRK1_C1_M2_Top Down_dist',
+    #             'Saline_Ai14_OPRK1_C1_M3_Top Down_dist',
+    #             'Saline_Ai14_OPRK1_C1_M4_Top Down_dist']]
+    # all_data['Avg Dist Saline'] = saline_avg_dist.mean(axis=1)
+    # all_data['Avg Dist Saline SEM'] = stats.sem(saline_avg_dist, axis=1)
+    #
+    # plt.plot(all_data['time'], all_data['Avg Dist Saline'], color='purple', linewidth=1,
+    #          label='Average Distance Saline')
+
+    saline_avg_vel = all_data.loc[:,
+               ['Saline_Ai14_OPRK1_C2_F0_Top Down_vel',
+                'Saline_Ai14_OPRK1_C2_F1_Top Down_vel',
+                'Saline_Ai14_OPRK1_C1_F2_Top Down_vel',
+                'Saline_Ai14_OPRK1_C1_M1_Top Down_vel',
+                'Saline_Ai14_OPRK1_C1_M2_Top Down_vel',
+                'Saline_Ai14_OPRK1_C1_M3_Top Down_vel',
+                'Saline_Ai14_OPRK1_C1_M4_Top Down_vel']]
+    all_vel= pd.DataFrame(data=saline_avg_vel.rolling(moving_average_duration_frames).mean(), columns=['Avg Vel Saline'])
+    all_vel['Avg Vel Saline SEM'] = stats.sem(saline_avg_vel, axis=1)
+    all_vel['time'] = (list_no * (1 / 60)) / 60
+    plt.plot(all_vel['time'], all_vel['Avg Vel Saline'], color='purple', linewidth=1,
+             label='Average Velocity Saline')
 
     """
     U50
@@ -127,19 +165,3 @@ if __name__ == '__main__':
     plt.ylabel('Cummulative Sum')
     plt.show()
 
-    # calculate mean for relevant u50 columns, this calculates an average velocity for each point in time
-    # all_data["Average U50 Female Dist"] = only_U50_F.mean(axis=1)
-    # all_data["Average U50 Female Other"] = only_U50_F_other.mean(axis=1)
-    #
-    # # then calculate the rolling mean over a specified period of time (based on df index)
-    # # since filmed in 30fps, this is calculated over 30 frames to represent one second
-    # all_data["U50 Female SEM"] = stats.sem(only_U50_F, axis=1)
-    # # all_data["Cumulative Sum U50 Female"] = all_data["Average U50 Female Dist"].cumsum()
-    # all_data.dropna(axis=1)
-    # # plt.plot(all_data['Paper_Redo_10_17_5mgkg_U50_Ai14_OPRK1_C2_F0_Top Down Time'], all_data["Average U50 Female Dist"],
-    # #          label='U50 Female Dist', color='#c4b7ff')
-    # plt.plot(all_data['Paper_Redo_10_17_5mgkg_U50_Ai14_OPRK1_C2_F0_Top Down raw time'], all_data["Average U50 Female Other"],
-    #          label='U50 Female Dist Other', color='#c4b7ff')
-    # # plt.fill_between(all_data['Paper_Redo_10_17_5mgkg_U50_Ai14_OPRK1_C2_F0_Top Down Time'], all_data["Average U50 Female Dist"]-all_data["U50 Female SEM"],
-    # #                  all_data["Average U50 Female Dist"]+all_data["U50 Female SEM"], alpha=0.5, facecolor='#c4b7ff')
-    #
