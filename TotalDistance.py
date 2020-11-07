@@ -26,7 +26,7 @@ DLCscorer = 'DLC_resnet50_BigBinTopSep17shuffle1_250000'
 
 def velocity(video, color, label):
 
-    dataname = str(Path(video).stem) + DLCscorer + 'filtered.h5'
+    dataname = str(Path(video).stem) + DLCscorer + '.h5'
     print(dataname)
 
     #loading output of DLC
@@ -54,7 +54,7 @@ def velocity(video, color, label):
     dist_sum = inst_dist.cumsum()
 
 
-    # plt.plot(time, vel_avg, color=color, label=label) #instantaneous velocity plot
+    # plt.plot(time, vel_avg, color=color, label=label) #instantaneous rolling average velocity plot
     # plt.plot(time, dist_sum, color=color) #cummulative distance plot
     all_data[video+"_dist"] = dist_sum[:108060]
     all_data[video+"_vel"] = vel_avg[:108060]
@@ -77,33 +77,35 @@ if __name__ == '__main__':
     velocity(video='Saline_Ai14_OPRK1_C1_M3_Top Down', color='pink', label='M3 Saline')
     velocity(video='Saline_Ai14_OPRK1_C1_M4_Top Down', color='pink', label='M4 Saline')
 
-    # saline_avg_dist = all_data.loc[:,
-    #            ['Saline_Ai14_OPRK1_C2_F0_Top Down_dist',
-    #             'Saline_Ai14_OPRK1_C2_F1_Top Down_dist',
-    #             'Saline_Ai14_OPRK1_C1_F2_Top Down_dist',
-    #             'Saline_Ai14_OPRK1_C1_M1_Top Down_dist',
-    #             'Saline_Ai14_OPRK1_C1_M2_Top Down_dist',
-    #             'Saline_Ai14_OPRK1_C1_M3_Top Down_dist',
-    #             'Saline_Ai14_OPRK1_C1_M4_Top Down_dist']]
-    # all_data['Avg Dist Saline'] = saline_avg_dist.mean(axis=1)
-    # all_data['Avg Dist Saline SEM'] = stats.sem(saline_avg_dist, axis=1)
-    #
-    # plt.plot(all_data['time'], all_data['Avg Dist Saline'], color='purple', linewidth=1,
-    #          label='Average Distance Saline')
+    saline_avg_dist = all_data.loc[:,
+               ['Saline_Ai14_OPRK1_C2_F0_Top Down_dist',
+                'Saline_Ai14_OPRK1_C2_F1_Top Down_dist',
+                'Saline_Ai14_OPRK1_C1_F2_Top Down_dist',
+                'Saline_Ai14_OPRK1_C1_M1_Top Down_dist',
+                'Saline_Ai14_OPRK1_C1_M2_Top Down_dist',
+                'Saline_Ai14_OPRK1_C1_M3_Top Down_dist',
+                'Saline_Ai14_OPRK1_C1_M4_Top Down_dist']]
+    all_data['Avg Dist Saline'] = saline_avg_dist.mean(axis=1)
+    all_data['Avg Dist Saline SEM'] = stats.sem(saline_avg_dist, axis=1)
 
-    saline_avg_vel = all_data.loc[:,
-               ['Saline_Ai14_OPRK1_C2_F0_Top Down_vel',
-                'Saline_Ai14_OPRK1_C2_F1_Top Down_vel',
-                'Saline_Ai14_OPRK1_C1_F2_Top Down_vel',
-                'Saline_Ai14_OPRK1_C1_M1_Top Down_vel',
-                'Saline_Ai14_OPRK1_C1_M2_Top Down_vel',
-                'Saline_Ai14_OPRK1_C1_M3_Top Down_vel',
-                'Saline_Ai14_OPRK1_C1_M4_Top Down_vel']]
-    all_vel= pd.DataFrame(data=saline_avg_vel.rolling(moving_average_duration_frames).mean(), columns=['Avg Vel Saline'])
-    all_vel['Avg Vel Saline SEM'] = stats.sem(saline_avg_vel, axis=1)
-    all_vel['time'] = (list_no * (1 / 60)) / 60
-    plt.plot(all_vel['time'], all_vel['Avg Vel Saline'], color='purple', linewidth=1,
-             label='Average Velocity Saline')
+    plt.plot(all_data['time'], all_data['Avg Dist Saline'], color='pink', linewidth=1,
+             label='Average Distance Saline')
+
+
+    # saline_avg_vel = all_data.loc[:,
+    #            ['Saline_Ai14_OPRK1_C2_F0_Top Down_vel',
+    #             'Saline_Ai14_OPRK1_C2_F1_Top Down_vel',
+    #             'Saline_Ai14_OPRK1_C1_F2_Top Down_vel',
+    #             'Saline_Ai14_OPRK1_C1_M1_Top Down_vel',
+    #             'Saline_Ai14_OPRK1_C1_M2_Top Down_vel',
+    #             'Saline_Ai14_OPRK1_C1_M3_Top Down_vel',
+    #             'Saline_Ai14_OPRK1_C1_M4_Top Down_vel']]
+    #
+    # all_data['Avg Vel Saline'] = saline_avg_vel.mean(axis=1)
+    # all_data['Avg Vel Saline SEM'] = stats.sem(saline_avg_vel, axis=1)
+    # all_data['time'] = (list_no * (1 / 60)) / 60
+    # plt.plot(all_data['time'], all_data['Avg Vel Saline'], color='pink', linewidth=1,
+    #          label='Average Velocity Saline')
 
     """
     U50
@@ -117,6 +119,33 @@ if __name__ == '__main__':
     velocity(video='U50_Ai14_OPRK1_C1_M3_Top Down', color='orange', label='M3 Saline+5mgkg U50')
     velocity(video='U50_Ai14_OPRK1_C1_M4_Top Down', color='orange', label='M4 Saline+5mgkg U50')
 
+    u50_avg_dist = all_data.loc[:,
+               ['U50_Ai14_OPRK1_C2_F0_Top Down_dist',
+                'U50_Ai14_OPRK1_C1_F1_Top Down_dist',
+                'U50_Ai14_OPRK1_C2_F2_Top Down_dist',
+                'U50_Ai14_OPRK1_C1_M1_Top Down_dist',
+                'U50_Ai14_OPRK1_C1_M2_Top Down_dist',
+                'U50_Ai14_OPRK1_C1_M3_Top Down_dist',
+                'U50_Ai14_OPRK1_C1_M4_Top Down_dist']]
+    all_data['Avg Dist U50'] = u50_avg_dist.mean(axis=1)
+    all_data['Avg Dist U50 SEM'] = stats.sem(u50_avg_dist, axis=1)
+
+    plt.plot(all_data['time'], all_data['Avg Dist U50'], color='orange', linewidth=1,
+             label='Average Distance U50')
+
+    # u50_avg_vel = all_data.loc[:,
+    #            ['U50_Ai14_OPRK1_C2_F0_Top Down_vel',
+    #             'U50_Ai14_OPRK1_C1_F1_Top Down_vel',
+    #             'U50_Ai14_OPRK1_C2_F2_Top Down_vel',
+    #             'U50_Ai14_OPRK1_C1_M1_Top Down_vel',
+    #             'U50_Ai14_OPRK1_C1_M2_Top Down_vel',
+    #             'U50_Ai14_OPRK1_C1_M3_Top Down_vel',
+    #             'U50_Ai14_OPRK1_C1_M4_Top Down_vel']]
+    # all_data['Avg Vel U50'] = u50_avg_vel.mean(axis=1)
+    # all_data['Avg Vel U50 SEM'] = stats.sem(u50_avg_vel, axis=1)
+    #
+    # plt.plot(all_data['time'], all_data['Avg Vel U50'], color='orange', linewidth=1,
+    #          label='Average Vel U50')
 
     """
     Naltrexone U50
@@ -129,8 +158,35 @@ if __name__ == '__main__':
     velocity(video='Nalt_U50_Ai14_OPRK1_C1_M2_Top Down', color='red', label='M2 3mgkg Nalt+5mgkg U50')
     velocity(video='Nalt_U50_Ai14_OPRK1_C1_M3_Top Down', color='red', label='M3 3mgkg Nalt+5mgkg U50')
     velocity(video='Nalt_U50_Ai14_OPRK1_C1_M4_Top Down', color='red', label='M4 3mgkg Nalt+5mgkg U50')
+
+    nalt_avg_dist = all_data.loc[:,
+               ['Naltr_U50_Ai14_OPRK1_C2_F0_Top Down_dist',
+                'Nalt_U50_Ai14_OPRK1_C1_F1_Top Down_dist',
+                'Nalt_U50_Ai14_OPRK1_C1_F2_Top Down_dist',
+                'Nalt_U50_Ai14_OPRK1_C1_M1_Top Down_dist',
+                'Nalt_U50_Ai14_OPRK1_C1_M2_Top Down_dist',
+                'Nalt_U50_Ai14_OPRK1_C1_M3_Top Down_dist',
+                'Nalt_U50_Ai14_OPRK1_C1_M4_Top Down_dist']]
+    all_data['Avg Dist Nalt'] = nalt_avg_dist.mean(axis=1)
+    all_data['Avg Dist Nalt SEM'] = stats.sem(nalt_avg_dist, axis=1)
+
+    plt.plot(all_data['time'], all_data['Avg Dist Nalt'], color='red', linewidth=1,
+             label='Average Distance Nalt')
+
+    # nalt_avg_vel = all_data.loc[:,
+    #            ['Naltr_U50_Ai14_OPRK1_C2_F0_Top Down_vel',
+    #             'Nalt_U50_Ai14_OPRK1_C1_F1_Top Down_vel',
+    #             'Nalt_U50_Ai14_OPRK1_C1_F2_Top Down_vel',
+    #             'Nalt_U50_Ai14_OPRK1_C1_M1_Top Down_vel',
+    #             'Nalt_U50_Ai14_OPRK1_C1_M2_Top Down_vel',
+    #             'Nalt_U50_Ai14_OPRK1_C1_M3_Top Down_vel',
+    #             'Nalt_U50_Ai14_OPRK1_C1_M4_Top Down_vel']]
+    # all_data['Avg Vel Nalt'] = nalt_avg_vel.mean(axis=1)
+    # all_data['Avg Vel Nalt SEM'] = stats.sem(nalt_avg_vel, axis=1)
     #
-    #
+    # plt.plot(all_data['time'], all_data['Avg Vel Nalt'], color='red', linewidth=1,
+    #          label='Average Velocity Nalt')
+
     """
     NORBNI U50
     """
@@ -142,9 +198,36 @@ if __name__ == '__main__':
     velocity(video='NORBNI_U50_Ai14_OPRK1_C1_M2_Top Down', color='blue', label='M2 10mgkg NORBNI+5mgkg U50')
     velocity(video='NORBNI_U50_Ai14_OPRK1_C1_M3_Top Down', color='blue', label='M3 10mgkg NORBNI+5mgkg U50')
     velocity(video='NORBNI_U50_Ai14_OPRK1_C1_M4_Top Down', color='blue', label='M4 10mgkg NORBNI+5mgkg U50')
+    norbni_u50_avg_dist = all_data.loc[:,
+               ['NORBNI_U50_Ai14_OPRK1_C2_F0_Top Down_dist',
+                'NORBNI_U50_Ai14_OPRK1_C2_F1_Top Down_dist',
+                'NORBNI_U50_Ai14_OPRK1_C2_F2_Top Down_dist',
+                'NORBNI_U50_Ai14_OPRK1_C1_M1_Top Down_dist',
+                'NORBNI_U50_Ai14_OPRK1_C1_M2_Top Down_dist',
+                'NORBNI_U50_Ai14_OPRK1_C1_M3_Top Down_dist',
+                'NORBNI_U50_Ai14_OPRK1_C1_M4_Top Down_dist']]
+    all_data['Avg Dist NORBNI+U50'] = norbni_u50_avg_dist.mean(axis=1)
+    all_data['Avg Dist NORBNI+U50 SEM'] = stats.sem(norbni_u50_avg_dist, axis=1)
+
+    plt.plot(all_data['time'], all_data['Avg Dist NORBNI+U50'], color='blue', linewidth=1,
+             label='Average Distance NORBNI+U50')
+
+    # norbni_u50_avg_vel = all_data.loc[:,
+    #            ['NORBNI_U50_Ai14_OPRK1_C2_F0_Top Down_vel',
+    #             'NORBNI_U50_Ai14_OPRK1_C2_F1_Top Down_vel',
+    #             'NORBNI_U50_Ai14_OPRK1_C2_F2_Top Down_vel',
+    #             'NORBNI_U50_Ai14_OPRK1_C1_M1_Top Down_vel',
+    #             'NORBNI_U50_Ai14_OPRK1_C1_M2_Top Down_vel',
+    #             'NORBNI_U50_Ai14_OPRK1_C1_M3_Top Down_vel',
+    #             'NORBNI_U50_Ai14_OPRK1_C1_M4_Top Down_vel']]
+    # all_data['Avg Vel NORBNI+U50'] = norbni_u50_avg_dist.mean(axis=1)
+    # all_data['Avg Vel NORBNI+U50 SEM'] = stats.sem(norbni_u50_avg_vel, axis=1)
+    #
+    # plt.plot(all_data['time'], all_data['Avg Vel NORBNI+U50'], color='blue', linewidth=1,
+    #          label='Average Vel NORBNI+U50')
 
     """
-    NORBNI U50 + Saline
+    NORBNI + Saline
     """
     velocity(video='NORBNI_Saline_Ai14_OPRK1_C2_F0_Top Down', color='purple', label='F0 10mgkg NORBNI+Saline')
     velocity(video='NORBNI_Saline_Ai14_OPRK1_C2_F1_Top Down', color='purple', label='F1 10mgkg NORBNI+Saline')
@@ -155,6 +238,33 @@ if __name__ == '__main__':
     velocity(video='NORBNI_Saline_Ai14_OPRK1_C1_M3_Top Down', color='purple', label='M3 10mgkg NORBNI+Saline')
     velocity(video='NORBNI_Saline_Ai14_OPRK1_C1_M4_Top Down', color='purple', label='M4 10mgkg NORBNI+Saline')
 
+    norbni_saline_avg_dist = all_data.loc[:,
+               ['NORBNI_Saline_Ai14_OPRK1_C2_F0_Top Down_dist',
+                'NORBNI_Saline_Ai14_OPRK1_C2_F1_Top Down_dist',
+                'NORBNI_Saline_Ai14_OPRK1_C2_F2_Top Down_dist',
+                'NORBNI_Saline_Ai14_OPRK1_C1_M1_Top Down_dist',
+                'NORBNI_Saline_Ai14_OPRK1_C1_M2_Top Down_dist',
+                'NORBNI_Saline_Ai14_OPRK1_C1_M3_Top Down_dist',
+                'NORBNI_Saline_Ai14_OPRK1_C1_M3_Top Down_dist']]
+    all_data['Avg Dist NORBNI+Saline'] = norbni_saline_avg_dist.mean(axis=1)
+    all_data['Avg Dist NORBNI+Saline'] = stats.sem(norbni_saline_avg_dist, axis=1)
+
+    plt.plot(all_data['time'], all_data['Avg Dist NORBNI+Saline'], color='purple', linewidth=1,
+             label='Average Distance NORBNI+Saline')
+
+    # norbni_saline_avg_vel = all_data.loc[:,
+    #            ['NORBNI_Saline_Ai14_OPRK1_C2_F0_Top Down_vel',
+    #             'NORBNI_Saline_Ai14_OPRK1_C2_F1_Top Down_vel',
+    #             'NORBNI_Saline_Ai14_OPRK1_C2_F2_Top Down_vel',
+    #             'NORBNI_Saline_Ai14_OPRK1_C1_M1_Top Down_vel',
+    #             'NORBNI_Saline_Ai14_OPRK1_C1_M2_Top Down_vel',
+    #             'NORBNI_Saline_Ai14_OPRK1_C1_M3_Top Down_vel',
+    #             'NORBNI_Saline_Ai14_OPRK1_C1_M3_Top Down_vel']]
+    # all_data['Avg Vel NORBNI+Saline'] = norbni_saline_avg_vel.mean(axis=1)
+    # all_data['Avg Vel NORBNI+Saline'] = stats.sem(norbni_saline_avg_vel, axis=1)
+    #
+    # plt.plot(all_data['time'], all_data['Avg Vel NORBNI+Saline'], color='purple', linewidth=1,
+    #          label='Average Velocity NORBNI+Saline')
 
     '-----------------------------------------------------------------------------------------------------------'
     # plt.xlabel('Time')
