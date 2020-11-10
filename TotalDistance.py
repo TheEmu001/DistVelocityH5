@@ -18,9 +18,14 @@ list_no = np.arange(0.0, 108060.0, 1.0) #number of frames in 30 minutes
 # list_no = np.arange(0.0, 180000, 1.0) #number of frames in 50 minutes
 ms_time = np.arange(0.0, 2670.0, 0.4) #1ms increments of time
 # frame rate of camera in those experiments
+start_frame = 59 #frame to start at
+pick_frame = 30 # pick ever __th frame
+
 fps = 60
 no_seconds = 15
 moving_average_duration_frames = fps * no_seconds
+updated_window = no_seconds/(pick_frame/fps)
+updated_window = int(updated_window)
 
 DLCscorer = 'DLC_resnet50_BigBinTopSep17shuffle1_250000'
 
@@ -56,13 +61,13 @@ def velocity(video, color, label):
     dist_sum = inst_dist.cumsum()
 
     # taking every 6th row
-    every_6th = vel_avg.iloc[5::30]
+    every_6th = vel_avg.iloc[start_frame::pick_frame]
     nth_time = np.arange(len(every_6th))*.1
 
     # plt.plot(time[61:], vel_avg[61:], color=color, label=label) #instantaneous rolling average velocity plot raw
     # plt.plot(time, dist_sum, color=color) #cummulative distance plot
 
-    every_6th_avg = every_6th.rolling(30).mean()
+    every_6th_avg = every_6th.rolling(updated_window).mean()
     # plt.plot(nth_time[61:], every_6th_avg[61:], color=color, label=label)
     new_df = every_6th_avg.copy()
     all_data[video+"_dist"] = dist_sum[:108060]
@@ -73,10 +78,10 @@ def velocity(video, color, label):
 
 if __name__ == '__main__':
     # all_data['time'] = (list_no * (1 / 60)) / 60
-    all_data['time'] = (list_no * (4 / 10))
-    # # """
-    # # Saline
-    # # """
+
+    # """
+    # Saline
+    # """
     # velocity(video='Saline_Ai14_OPRK1_C2_F0_Top Down', color='pink', label='F0 Saline')
     # velocity(video='Saline_Ai14_OPRK1_C2_F1_Top Down', color='pink', label='F1 Saline')
     # velocity(video='Saline_Ai14_OPRK1_C1_F2_Top Down', color='pink', label='F2 Saline')
@@ -110,20 +115,24 @@ if __name__ == '__main__':
     #             'Saline_Ai14_OPRK1_C1_M3_Top Down_vel',
     #             'Saline_Ai14_OPRK1_C1_M4_Top Down_vel']]
     #
-    # all_data['Avg Vel Saline'] = saline_avg_vel.mean(axis=1)
-    # all_data['Avg Vel Saline SEM'] = stats.sem(saline_avg_vel, axis=1)
-    # all_data['time'] = (list_no * (1 / 60)) / 60
-    # # plt.plot(all_data['time'], all_data['Avg Vel Saline'], color='pink', linewidth=1,
-    # #          label='Average Velocity Saline')
+    # # all_data['Avg Vel Saline'] = saline_avg_vel.mean(axis=1)
+    # # all_data['Avg Vel Saline SEM'] = stats.sem(saline_avg_vel, axis=1)
+    # # all_data['time'] = (list_no * (1 / 60)) / 60
+    # # # plt.plot(all_data['time'], all_data['Avg Vel Saline'], color='black', linewidth=1,
+    # # #          label='Average Velocity Saline')
     #
     # vel_only_df_sal = saline_avg_vel.mean(axis=1)
     # vel_only_df_sal = vel_only_df_sal.dropna()
-    # better_time = np.arange(len(vel_only_df_sal))*.4
-    # plt.plot(better_time, vel_only_df_sal, color='pink', linewidth=1,
-    #          label='Average Velocity Nalt')
+    # vel_only_df_sal_sem = stats.sem(saline_avg_vel, axis=1)
+    # index_vals_sal = vel_only_df_sal.index
+    # better_time_sal = index_vals_sal * (1. / fps) / 60
+    # plt.plot(better_time_sal, vel_only_df_sal, color='black', linewidth=1,
+    #          label='Average Velocity Saline')
     #
     #
-    # # #
+    #
+    #
+    # #
     # """
     # U50
     # """
@@ -166,8 +175,10 @@ if __name__ == '__main__':
     #
     # vel_only_df_u50 = u50_avg_vel.mean(axis=1)
     # vel_only_df_u50 = vel_only_df_u50.dropna()
-    # better_time = np.arange(len(vel_only_df_u50))*.4
-    # plt.plot(better_time, vel_only_df_u50, color='orange', linewidth=1,
+    # vel_only_df_u50_sem = stats.sem(u50_avg_vel, axis=1)
+    # index_vals_u50 =  vel_only_df_u50.index
+    # better_time_u50 = index_vals_u50 * (1. / fps) / 60
+    # plt.plot(better_time_u50, vel_only_df_u50, color='orange', linewidth=1,
     #          label='Average Velocity U50')
     #
     # #
@@ -217,8 +228,10 @@ if __name__ == '__main__':
     #
     # vel_only_df_nal = nalt_avg_vel.mean(axis=1)
     # vel_only_df_nal = vel_only_df_nal.dropna()
-    # better_time = np.arange(len(vel_only_df_nal))*.4
-    # plt.plot(better_time, vel_only_df_nal, color='red', linewidth=1,
+    # vel_only_df_nal_sem = stats.sem(nalt_avg_vel, axis=1)
+    # index_vals_nal =  vel_only_df_nal.index
+    # better_time_nal = index_vals_nal * (1. / fps) / 60
+    # plt.plot(better_time_nal, vel_only_df_nal, color='red', linewidth=1,
     #          label='Average Velocity Nalt')
 
     """
@@ -262,6 +275,8 @@ if __name__ == '__main__':
 
     vel_only_df_nu = norbni_u50_avg_vel.mean(axis=1)
     vel_only_df_nu = vel_only_df_nu.dropna()
+    norbni_u50_avg_vel.dropna()
+    vel_only_df_nu_sem = stats.sem(vel_only_df_nu)
     index_vals = vel_only_df_nu.index
     better_time_nu = index_vals*(1./fps)/60
     plt.plot(better_time_nu, vel_only_df_nu, color='blue', linewidth=1,
@@ -307,22 +322,40 @@ if __name__ == '__main__':
                 'NORBNI_Saline_Ai14_OPRK1_C1_M3_Top Down_vel',
                 'NORBNI_Saline_Ai14_OPRK1_C1_M4_Top Down_vel'
                ]]
-    vel_only_df = norbni_saline_avg_vel.mean(axis=1)
-    vel_only_df = vel_only_df.dropna()
+    vel_only_df_og = norbni_saline_avg_vel.mean(axis=1)
+    vel_only_df = vel_only_df_og.dropna()
+    norbni_saline_avg_vel.dropna()
+    norbni_saline_df = pd.DataFrame(data=vel_only_df)
+    print(norbni_saline_df)
 
     # all_data['Avg Vel NORBNI+Saline'] = norbni_saline_avg_vel.mean(axis=1)
-    all_data['Avg Vel NORBNI+Saline SEM'] = stats.sem(norbni_saline_avg_vel, axis=1)
+    # all_data['Avg Vel NORBNI+Saline SEM'] = stats.sem(norbni_saline_avg_vel, axis=1)
 
     # plt.plot(all_data['time'], all_data['Avg Vel NORBNI+Saline'], color='purple', linewidth=1,
     #          label='Average Velocity NORBNI+Saline')
+    vel_norbni_sal_sem = stats.sem(norbni_saline_df, axis=1)
     index_vals_ns = vel_only_df.index
     better_time_ns = index_vals_ns*(1./fps)/60
     plt.plot(better_time_ns, vel_only_df, color='purple', linewidth=1,
              label='Average Velocity NORBNI+Saline')
 
+    #
+    # plt.fill_between(better_time_sal, vel_only_df_sal + vel_norbni_sal_sem,
+    #                  vel_only_df_sal - vel_norbni_sal_sem, alpha=0.25, facecolor='black',
+    #                  edgecolor='black')
+    # plt.fill_between(better_time_u50, vel_only_df_u50 - vel_only_df_u50_sem,
+    #                  vel_only_df_u50 + vel_only_df_u50_sem, alpha=0.25, facecolor='orange',
+    #                  edgecolor='orange')
+    # plt.fill_between(better_time_nal, vel_only_df_nal - vel_only_df_nal_sem,
+    #                  vel_only_df_nal + vel_only_df_nal_sem, alpha=0.25, facecolor='red',
+    #                  edgecolor='red')
+    plt.fill_between(better_time_nu, vel_only_df_nu - vel_only_df_nu_sem, vel_only_df_nu + vel_only_df_nu_sem, alpha=0.25, facecolor='blue', edgecolor='blue')
+    plt.fill_between(better_time_ns, vel_only_df - vel_norbni_sal_sem, vel_only_df + vel_norbni_sal_sem, alpha=0.25, facecolor='purple', edgecolor='purple')
+
     '-----------------------------------------------------------------------------------------------------------'
     plt.xlabel('Time [minutes]')
-    plt.ylabel('Instantaneous Velocity [cm/s] '+str(moving_average_duration_frames)+' frame average ')
+    plt.ylabel('Instantaneous Velocity [cm/s]')
+    plt.title('Instantaneous Velocity [cm/s] '+str(updated_window*2)+' second average ')
     # plt.legend(loc='upper left')
     leg = plt.legend(loc='upper left')
     for i in leg.legendHandles:
