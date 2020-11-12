@@ -244,3 +244,4 @@ if __name__ == '__main__':
     plt.show()
     print(avg_df.max())
     # plt.savefig('generated_figs\Cummulative Distance.eps', format='eps')
+
