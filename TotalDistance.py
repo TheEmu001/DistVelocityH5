@@ -10,6 +10,7 @@ import time_in_each_roi
 from scipy import stats
 from textwrap import wrap
 from scipy import integrate
+from matplotlib.backends.backend_pdf import PdfPages
 
 warnings.filterwarnings('ignore')
 
@@ -83,7 +84,7 @@ def velocity(video, color, label):
 
 if __name__ == '__main__':
     # all_data['time'] = (list_no * (1 / 60)) / 60
-
+    fig = plt.figure()
     """
     Saline
     """
@@ -433,4 +434,8 @@ if __name__ == '__main__':
         i.set_linewidth(2)
     plt.show()
 
-    all_data.to_csv("alldata.csv")
+    # pp = PdfPages("foo.pdf")
+    # pp.savefig(fig, bbox_inches='tight')
+    # pp.close()
+    fig.savefig("foo.pdf", bbox_inches='tight')
+    # all_data.to_csv("alldata.csv")
