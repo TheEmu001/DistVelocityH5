@@ -49,38 +49,48 @@ def velocity(video, color, label):
     bpt='head'
     vel = time_in_each_roi.calc_distance_between_points_in_a_vector_2d(np.vstack([Dataframe[DLCscorer][bpt]['x'].values.flatten(), Dataframe[DLCscorer][bpt]['y'].values.flatten()]).T)
 
+    # raw_x_y_vals_pd_df = pd.DataFrame(columns=['x', 'y'])
+    # raw_x_y_vals_pd_df['x'] = Dataframe[DLCscorer][bpt]['x'].values
+    # raw_x_y_vals_pd_df['y'] = Dataframe[DLCscorer][bpt]['y'].values
+    # every_6th_raw = raw_x_y_vals_pd_df.iloc[start_frame::pick_frame]
+
 
     # time=np.arange(len(vel))*1./fps #time that is 1/60 sec
 
     #notice the units of vel are relative pixel distance [per time step]
-    vel=vel*.03924
+    vel=vel*(1./fps)/100
     velocity_pd = pd.Series(vel)
     # vel_avg = velocity_pd.rolling(moving_average_duration_frames).mean()
 
     vel_avg = velocity_pd
-    inst_dist = vel*1./fps
+    # inst_dist = vel*1./fps
+    inst_dist = vel
     dist_sum = inst_dist.cumsum()
 
     # taking every 6th row
-    every_6th = vel_avg.iloc[start_frame::pick_frame]
+    # every_6th = vel_avg.iloc[start_frame::pick_frame] #uncomment this
+    every_6th = vel_avg
+    # every_6th = vel_avg
     nth_time = np.arange(len(every_6th))*.1
 
     # plt.plot(time[61:], vel_avg[61:], color=color, label=label) #instantaneous rolling average velocity plot raw
     # plt.plot(time, dist_sum, color=color) #cummulative distance plot
 
-    every_6th_avg = every_6th.rolling(updated_window).mean()
+    # every_6th_avg = every_6th.rolling(updated_window).mean()
+    every_6th_avg = every_6th
     # plt.plot(nth_time[61:], every_6th_avg[61:], color=color, label=label)
     new_df = every_6th_avg.copy()
     # all_data[video+"_dist"] = dist_sum[:108060]
     every_6th_avg_index = every_6th_avg.index
 
-    all_data[video + "_dist"] = every_6th_avg.cumsum()[:3600]
+    all_data[video + "_dist"] = every_6th_avg.cumsum()[:108060]
     # all_data[video+"_vel"] = vel_avg[:108060]
     all_data[video + "_vel"] = new_df[:108060]
     # print(every_6th)
-    # time = np.arange(len(every_6th))*(pick_frame/fps)
-    time = np.arange(len(all_data[video + "_dist"])) * (pick_frame / fps)
-    all_data['time'] = time/60
+    time = np.arange(len(all_data[video + "_dist"]))
+    # time = np.arange(len(all_data[video + "_dist"])) * (pick_frame / fps) #uncomment this
+
+    all_data['time'] = time/60/60
 
 if __name__ == '__main__':
     # all_data['time'] = (list_no * (1 / 60)) / 60
@@ -424,7 +434,7 @@ if __name__ == '__main__':
     # plt.show()
 
     plt.xlabel('Time (minutes)', fontsize=12)
-    plt.ylabel('Distance (cm)', fontsize=12)
+    plt.ylabel('Distance (m)', fontsize=12)
     plt.xticks(fontsize=12)
     plt.yticks(fontsize=12)
     plt.title('Total Distance Travelled', fontsize=12)
@@ -438,4 +448,4 @@ if __name__ == '__main__':
     # pp.savefig(fig, bbox_inches='tight')
     # pp.close()
     fig.savefig("foo.pdf", bbox_inches='tight')
-    # all_data.to_csv("alldata.csv")
+    all_data.to_csv("alldata.csv")
